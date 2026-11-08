@@ -2,6 +2,11 @@ import os
 import json
 import requests
 from dotenv import load_dotenv
+from solders.pubkey import Pubkey
+from solders.system_program import transfer, TransferParams
+from solders.message import Message
+from solders.transaction import Transaction
+from solders.keypair import Keypair
 
 load_dotenv()
 
@@ -35,6 +40,30 @@ class SolanaInspector:
         }
         response = requests.post(self.rpc_url, json=payload, timeout=10)
         return response.json()
+
+    def generate_sample_transfer_tx_b64(self) -> str:
+        # Generates a valid real serialized Solana transaction for testing simulation via RPC
+        sender = Keypair()
+        receiver = Pubkey.from_string("11111111111111111111111111111111")
+        
+        instruction = transfer(
+            TransferParams(
+                from_pubkey=sender.pubkey(),
+                to_pubkey=receiver,
+                lamports=1000
+            )
+        )
+        
+        # Fetch recent blockhash or use a dummy valid base58 for simulation payload structure
+        # Using a dummy blockhash standard for simulation payload testing
+        msg = Message.new_with_blockhash(
+            [instruction],
+            sender.pubkey(),
+            Pubkey.from_string("11111111111111111111111111111111")
+        )
+        tx = Transaction([sender], msg, sender.pubkey())
+        import base64
+        return base64.b64encode(bytes(tx)).decode('utf-8')
 
 if __name__ == "__main__":
     inspector = SolanaInspector()
