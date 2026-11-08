@@ -1,34 +1,96 @@
 # Solana Sentinel Agent
 
-> An AI-powered autonomous security inspector and simulation guard designed for the Solana blockchain.
+An AI-powered autonomous security inspector and simulation guard designed for the Solana blockchain.
 
 ## Overview
-Solana Sentinel Agent is built to protect Web3 users against malicious programs, token drainers, and unverified smart contract interactions. Leveraging Solana's JSON-RPC simulation API combined with a heuristic AI agent engine in Python, Sentinel intercepts incoming transactions, evaluates execution logs, tracks compute unit consumption, and issues immediate risk verdicts in natural language before users sign.
 
-## Features
-- RPC Simulation Integration: Connects directly to Solana Devnet/Mainnet to test transaction payloads without broadcast risk.
-- AI Security Agent: Analyzes program invocation logs, filters trusted system programs vs. unknown/malicious contracts, and flags anomalous compute loads.
-- Rich CLI Interface: Provides clean, structured terminal security reports categorized by risk levels (LOW, MEDIUM, CRITICAL).
+Solana Sentinel Agent protects Web3 users against malicious programs, token drainers, and unverified smart contract interactions. Combining Solana JSON-RPC simulation APIs via `solders` and `solana-py` with an automated heuristic security engine, Sentinel intercepts transaction payloads, evaluates execution logs, tracks compute unit consumption, and outputs structured risk verdicts prior to signing.
 
-## Tech Stack
-- Language: Python 3.11+
-- Blockchain Interface: Requests / Solana JSON-RPC
-- Terminal UI: Rich
+## Key Features
+
+- RPC Transaction Simulation: Executes real-time payload simulations on Solana Devnet/Mainnet without broadcasting on-chain state changes.
+- Automated Threat Engine: Inspects program invocation logs, filters core system programs from unknown targets, and flags computational anomalies.
+- Terminal UI Reports: Formats execution results and danger levels (LOW, MEDIUM, CRITICAL) using the `rich` visual framework.
+- Engineering Test Suite: Includes unit tests to verify agent behavior and transaction parsing logic.
+
+## Technical Architecture
+
+- Language: Python 3.10+
+- Solana SDK: `solana-py`, `solders`
+- Terminal Display: `rich`
+- Testing: `unittest`
+
+## Installation
+
+Clone the repository and set up the local environment:
+
+```bash
+git clone [https://github.com/MigMarGil/solana-sentinel-agent.git](https://github.com/MigMarGil/solana-sentinel-agent.git)
+cd solana-sentinel-agent
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+## Running Tests
+Execute the automated unit test suite:
+cat << 'EOF' > ~/solana-sentinel-agent/README.md
+# Solana Sentinel Agent
+
+An AI-powered autonomous security inspector and simulation guard designed for the Solana blockchain.
+
+## Overview
+
+Solana Sentinel Agent protects Web3 users against malicious programs, token drainers, and unverified smart contract interactions. Combining Solana JSON-RPC simulation APIs via `solders` and `solana-py` with an automated heuristic security engine, Sentinel intercepts transaction payloads, evaluates execution logs, tracks compute unit consumption, and outputs structured risk verdicts prior to signing.
+
+## Key Features
+
+- RPC Transaction Simulation: Executes real-time payload simulations on Solana Devnet/Mainnet without broadcasting on-chain state changes.
+- Automated Threat Engine: Inspects program invocation logs, filters core system programs from unknown targets, and flags computational anomalies.
+- Terminal UI Reports: Formats execution results and danger levels (LOW, MEDIUM, CRITICAL) using the `rich` visual framework.
+- Engineering Test Suite: Includes unit tests to verify agent behavior and transaction parsing logic.
+
+## Technical Architecture
+
+- Language: Python 3.10+
+- Solana SDK: `solana-py`, `solders`
+- Terminal Display: `rich`
+- Testing: `unittest`
+
+## Installation
+
+Clone the repository and set up the local environment:
+
+```bash
+git clone [https://github.com/MigMarGil/solana-sentinel-agent.git](https://github.com/MigMarGil/solana-sentinel-agent.git)
+cd solana-sentinel-agent
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+## Running Tests
+
+Execute the automated unit test suite:
+
+
+```bash
+python3 -m unittest discover tests
+```
 
 ## Usage
 
-1. Clone the repository and set up your virtual environment:
-   git clone https://github.com/MigMarGil/solana-sentinel-agent.git
-   cd solana-sentinel-agent
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
+Simulate a standard, low-risk System Program transaction
 
-2. Run the safe transaction simulation:
-   python3 src/cli.py safe
+```bash
+python3 src/cli.py safe
+```
 
-3. Run the malicious transaction simulation:
-   python3 src/cli.py malicious
+Simulate an unverified program transaction triggering risk thresholds:
+
+```bash
+python3 src/cli.py malicious
+```
 
 ## License
-MIT License
+
+This project is open-source software licensed under the MIT License
+
